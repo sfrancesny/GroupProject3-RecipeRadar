@@ -1,14 +1,14 @@
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage';
-import SignupPage from './pages/SignupPage';
-import ProfilePage from './pages/ProfilePage';
+import HomePage from './pages/HomePage.jsx';
+import LoginPage from './pages/LoginPage.jsx';
+import SignupPage from './pages/SignupPage.jsx';
+import ProfilePage from './pages/ProfilePage.jsx';
 import SearchResultsPage from './pages/searchResultsPage.jsx';
-import RecipePage from './pages/RecipePage';
+import RecipePage from './pages/RecipePage.jsx';
 import SubmitRecipePage from './pages/submitRecipePage.jsx';
-import ErrorPage from './pages/ErrorPage';
+import ErrorPage from './pages/ErrorPage.jsx';
 
 // routes for pages 
 const router = createBrowserRouter([
