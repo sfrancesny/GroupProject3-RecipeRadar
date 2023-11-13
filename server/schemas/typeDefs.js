@@ -2,15 +2,11 @@ const typeDefs = `
   type Ingredient {
     _id: ID
     ingredientName: String
-    category: String
-    unitOfMeasurement: String
-    nutritionalInfo: NutritionalInfo
   }
 
   type NutritionalInfo {
     calories: Float
     fat: Float
-    protein: Float
   }
 
   type Recipe {
@@ -47,6 +43,10 @@ const typeDefs = `
     user: User!
   }
 
+  type LogoutPayload {
+    message: String!
+  }
+
   type Query {
     recipes: [Recipe]
     recipe(_id: ID!): Recipe
@@ -60,8 +60,9 @@ const typeDefs = `
     updateRecipe(_id: ID!, updates: RecipeInput!): Recipe
     deleteRecipe(_id: ID!): Recipe
     createRecipe(title: String!, description: String, ingredients: [String]!, instructions: [String]!): Recipe
+    loginUser(username: String!, password: String!): AuthPayload
+    logoutUser: LogoutPayload
   }
 `;
 
 module.exports = typeDefs;
-

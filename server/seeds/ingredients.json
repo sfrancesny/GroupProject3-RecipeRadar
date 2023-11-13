@@ -1,9 +1,9 @@
 [
-    { "name": "Flour" },
-    { "name": "Sugar" },
-    { "name": "Eggs" },
-    { "name": "Oil" },
-    { "name": "Milk" },
-    { "name": "Cocoa Powder" }
+    { "ingredientName": "Flour" },
+    { "ingredientName": "Sugar" },
+    { "ingredientName": "Eggs" },
+    { "ingredientName": "Oil" },
+    { "ingredientName": "Milk" },
+    { "ingredientName": "Cocoa Powder" }
   ]
   
