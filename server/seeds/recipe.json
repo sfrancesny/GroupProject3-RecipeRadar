@@ -1,37 +1,35 @@
 [
   {
+    "title": "Vegetable Soup",
+    "description": "A hearty and nutritious vegetable soup.",
+    "ingredients": [
+      ["Carrot", "Potato", "Broccoli", "Vegetable Broth"]
+    ],
+    "instructions":  [
+      "Chop the carrots, potatoes, and broccoli.",
+      "In a large pot, combine chopped vegetables and vegetable broth. Bring to a boil.",
+      "Simmer until vegetables are tender. Serve hot."
+    ],
+    "preparationTime": 15,
+    "cookingTime": 30,
+    "servings": 4,
+    "author": "soniafrances"
+  },
+  {
     "title": "Chocolate Cake",
     "description": "Rich chocolate sponge with a chocolate buttercream icing.",
     "ingredients": [
-      {
-        "ingredient": " 65525aef4736b94564167731",
-        "quantity": 200,
-        "unitOfMeasurement": "grams"
-      },
-      {
-        "ingredient": "65525aef4736b94564167730",
-        "quantity": 300,
-        "unitOfMeasurement": "grams"
-      }
+      ["Sugar", "Flour", "Egg", "Milk"]
     ],
     "instructions": [
-      {
-        "stepNumber": 1,
-        "instructionText": "Preheat the oven to 350F."
-      },
-      {
-        "stepNumber": 2,
-        "instructionText": "Mix the chocolate and butter in a bowl."
-      }
+      "Preheat the oven to 350F.",
+      "Mix the chocolate, flour, butter, and sugar in a bowl.",
+      "Bake in the preheated oven for 30-40 minutes or until a toothpick inserted comes out clean.", 
+      "Let it cool completely before icing with chocolate buttercream."
     ],
-    "tags": ["dessert", "baking", "chocolate"],
-    "images": ["chocolate-cake.jpg"],
     "preparationTime": 30,
-    "cookingTime": 60,
-    "servings": 8,
-    "difficultyLevel": "Medium",
-    "author": "soniafrances",
-    "source": "Grandma's Recipe Book",
-    "rating": 5
+    "cookingTime": 40,
+    "servings": 12,
+    "author": "Admin"
   }
-]
+]    

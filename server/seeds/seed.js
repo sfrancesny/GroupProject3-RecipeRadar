@@ -2,61 +2,63 @@ const mongoose = require('mongoose');
 const Recipe = require('../models/recipeModel');
 const User = require('../models/userModel');
 const Ingredient = require('../models/ingredientsModel');
-const usersData = require('./user.json'); 
-const recipesData = require('./recipe.json'); 
-const ingredientsData = require('./ingredients.json');
+const usersData = require('./user.json');
+const recipesData = require('./recipe.json');
 
-mongoose.connect('mongodb://127.0.0.1:27017')
-  .then(() => console.log('MongoDB Connected'))
-  .catch(err => console.log(err));
+// Connect to MongoDB
+mongoose.connect('mongodb://127.0.0.1:27017', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
-const seedDatabase = async () => {
+// Seed Users
+async function seedUsers() {
   try {
-    // clears the database of existing users, recipes, and ingredients
-    await User.deleteMany({});
-    await Recipe.deleteMany({});
-    await Ingredient.deleteMany({});
+    const options = { upsert: true, new: true, setDefaultsOnInsert: true };
 
-    // seed the ingredients
-    const insertedIngredients = await Ingredient.insertMany(ingredientsData);
-    console.log('Ingredients successfully added!');
-    insertedIngredients.forEach(ingredient => {
-      console.log(`Ingredient: ${ingredient.name}, ID: ${ingredient._id}`);
-    });
+    for (const userData of usersData) {
+      const filter = { username: userData.username };
+      await User.findOneAndUpdate(filter, userData, options);
+    }
 
-    // inserts the users from the JSON file
-    const createdUsers = await User.insertMany(usersData);
-
-    // map through the recipesData & replace w/ actual user IDs
-    const preparedRecipes = recipesData.map(recipe => {
-      const user = createdUsers.find(u => u.username === recipe.author);
-      if (!user) {
-        throw new Error(`User not found for the author: ${recipe.author}`);
-      }
-      return { ...recipe, author: user._id };
-    });
-
-    // inserts the recipes with updated author IDs
-    const insertedRecipes = await Recipe.insertMany(preparedRecipes);
-    console.log('Recipes successfully added!');
-
-    // when seeding is done, log the recipes and users
-    const recipes = await Recipe.find();
-    recipes.forEach(recipe => {
-      console.log(`Recipe: ${recipe.name}, ID: ${recipe._id}`);
-    });
-
-    const users = await User.find();
-    users.forEach(user => {
-      console.log(`User: ${user.username}, ID: ${user._id}`);
-    });
-
-    console.log('Database seeded with users, recipes, and ingredients!');
+    console.log('Users successfully added!');
   } catch (error) {
-    console.error('Error seeding database:', error);
+    console.error('Error seeding users:', error);
+    throw error;
+  }
+}
+
+// Seed Recipes
+async function seedRecipes() {
+  try {
+    // Loop through each recipe data
+    for (const recipeData of recipesData) {
+      // Modify recipe data to use author's username directly and ingredients as strings
+      const modifiedRecipe = {
+        ...recipeData,
+        ingredients: recipeData.ingredients.map(ingredient => ingredient.ingredientName) // Use only the ingredient name
+      };
+
+      // Insert the modified recipe data
+      await Recipe.create(modifiedRecipe);
+    }
+
+    console.log('Recipes successfully added!');
+  } catch (error) {
+    console.error('Error seeding recipes:', error);
+    throw error;
   } finally {
+    // Close the connection after seeding
     mongoose.connection.close();
   }
-};
+}
 
-seedDatabase();
+// Seed data sequentially
+async function seedData() {
+  await seedUsers();
+  await seedRecipes();
+}
+
+// Run the seed process
+seedData();
+
