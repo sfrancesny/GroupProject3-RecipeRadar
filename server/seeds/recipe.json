@@ -2,9 +2,7 @@
   {
     "title": "Vegetable Soup",
     "description": "A hearty and nutritious vegetable soup.",
-    "ingredients": [
-      ["Carrot", "Potato", "Broccoli", "Vegetable Broth"]
-    ],
+    "ingredients": ["Carrot", "Potato", "Broccoli", "Vegetable Broth"],
     "instructions":  [
       "Chop the carrots, potatoes, and broccoli.",
       "In a large pot, combine chopped vegetables and vegetable broth. Bring to a boil.",
@@ -18,9 +16,7 @@
   {
     "title": "Chocolate Cake",
     "description": "Rich chocolate sponge with a chocolate buttercream icing.",
-    "ingredients": [
-      ["Sugar", "Flour", "Egg", "Milk"]
-    ],
+    "ingredients": ["Sugar", "Flour", "Egg", "Milk"],
     "instructions": [
       "Preheat the oven to 350F.",
       "Mix the chocolate, flour, butter, and sugar in a bowl.",

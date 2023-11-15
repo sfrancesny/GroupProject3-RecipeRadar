@@ -1,5 +1,5 @@
 // mutation.js
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 export const CreateRecipe = gql`
   mutation CreateRecipe($recipeInput: RecipeInput) {
@@ -13,7 +13,6 @@ export const CreateRecipe = gql`
     instructions
     author 
   }
-}
 }`;
 
 export const UpdateRecipe = gql`
@@ -69,8 +68,8 @@ export const UpdateUser = gql`
 `;
 
 export const LoginUser = gql`
-  mutation LoginUser($loginInput: LoginInput) {
-    loginUser(loginInput: $loginInput) {
+  mutation LoginUser($username: String!, $password: String!) {
+    loginUser(username: $username, password: $password) {
       token
       user {
         _id

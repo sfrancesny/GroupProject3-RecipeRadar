@@ -7,9 +7,18 @@ const recipesData = require('./recipe.json');
 
 // Connect to MongoDB
 mongoose.connect('mongodb://127.0.0.1:27017', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
 });
+
+// Function to drop collections
+async function dropCollections() {
+  const db = mongoose.connection.db;
+  const collections = await db.listCollections().toArray();
+
+  for (const collection of collections) {
+    await db.dropCollection(collection.name);
+    console.log(`Dropped collection: ${collection.name}`);
+  }
+}
 
 // Seed Users
 async function seedUsers() {
@@ -33,14 +42,8 @@ async function seedRecipes() {
   try {
     // Loop through each recipe data
     for (const recipeData of recipesData) {
-      // Modify recipe data to use author's username directly and ingredients as strings
-      const modifiedRecipe = {
-        ...recipeData,
-        ingredients: recipeData.ingredients.map(ingredient => ingredient.ingredientName) // Use only the ingredient name
-      };
-
-      // Insert the modified recipe data
-      await Recipe.create(modifiedRecipe);
+      // Use recipe data directly without modifying ingredients
+      await Recipe.create(recipeData);
     }
 
     console.log('Recipes successfully added!');
@@ -55,8 +58,13 @@ async function seedRecipes() {
 
 // Seed data sequentially
 async function seedData() {
-  await seedUsers();
-  await seedRecipes();
+  await mongoose.connection.once('open', async () => {
+    console.log("Connected to MongoDB");
+    await dropCollections();  // Drop collections before seeding
+    await seedUsers();
+    await seedRecipes();
+    mongoose.connection.close(); // Close the connection after seeding
+  });
 }
 
 // Run the seed process
