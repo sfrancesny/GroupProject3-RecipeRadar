@@ -7,25 +7,20 @@ const userSchema = new Schema({
     username: {
         type: String,
         required: true,
-        unique: true, // Ensure usernames are unique
+        unique: true
     },
     email: {
         type: String,
         required: true,
-        unique: true, // Ensure email addresses are unique
+        unique: true, 
     },
     password: {
         type: String,
         required: true,
     },
-    dietaryRestrictions: [
-        {
-            type: String,
-        },
-    ],
 });
 
-// Define a method to check if the provided password is correct
+// defines a method to check if the provided password is correct
 userSchema.methods.isCorrectPassword = async function (password) {
     return bcrypt.compare(password, this.password);
 };

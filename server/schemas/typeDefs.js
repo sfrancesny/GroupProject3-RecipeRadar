@@ -1,21 +1,21 @@
+// server\schemas\typeDefs.js
+
 const typeDefs = `
   type Ingredient {
     _id: ID
-    ingredientName: String
-  }
-
-  type NutritionalInfo {
-    calories: Float
-    fat: Float
+    name: String
   }
 
   type Recipe {
     _id: ID
     title: String
     description: String
-    ingredients: [Ingredient]
+    preparationTime: Int
+    cookingTime: Int
+    servings: Int
+    ingredients: [String]
     instructions: [String]
-    author: User
+    author: String
   }
 
   type User {
@@ -25,11 +25,19 @@ const typeDefs = `
     recipes: [Recipe]
   }
 
+  input IngredientInput {
+    name: String
+  }
+
   input RecipeInput {
     title: String
     description: String
+    preparationTime: Int
+    cookingTime: Int
+    servings: Int
     ingredients: [String]
     instructions: [String]
+    author: String
   }
 
   input UserUpdateInput {
@@ -49,9 +57,9 @@ const typeDefs = `
 
   type Query {
     recipes: [Recipe]
-    recipe(_id: ID!): Recipe
+    singleRecipe(_id: ID!): Recipe
     users: [User]
-    user(_id: ID!): User
+    singleUser(_id: ID!): User
   }
 
   type Mutation {
@@ -59,7 +67,7 @@ const typeDefs = `
     updateUser(username: String, email: String, password: String): User
     updateRecipe(_id: ID!, updates: RecipeInput!): Recipe
     deleteRecipe(_id: ID!): Recipe
-    createRecipe(title: String!, description: String, ingredients: [String]!, instructions: [String]!): Recipe
+    createRecipe(title: String!, description: String, ingredients: [String]!, instructions: [String]!, author: String!): Recipe
     loginUser(username: String!, password: String!): AuthPayload
     logoutUser: LogoutPayload
   }

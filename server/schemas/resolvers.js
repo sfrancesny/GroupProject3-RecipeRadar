@@ -1,3 +1,5 @@
+// server\schemas\resolvers.js
+
 const Recipe = require('../models/recipeModel');
 const User = require('../models/userModel');
 const bcrypt = require('bcrypt');
@@ -8,13 +10,13 @@ const resolvers = {
         recipes: async () => {
             return await Recipe.find();
         },
-        recipe: async (parent, { _id }) => {
+        singleRecipe: async (parent, { _id }) => {
             return await Recipe.findById(_id);
         },
         users: async () => {
             return await User.find();
         },
-        user: async (parent, args, context) => {
+        singleUser: async (parent, args, context) => {
             if (context.user) {
                 return await User.findById(context.user._id);
             }
@@ -24,11 +26,16 @@ const resolvers = {
     Mutation: {
         createRecipe: async (parent, args, context) => {
             if (context.user) {
-                const recipe = await Recipe.create({ ...args, author: context.user._id });
+                const recipe = await Recipe.create({ 
+                    ...args, 
+                    author: context.user.username, 
+                    ingredients: args.ingredients
+                }); 
                 return recipe;
             }
             throw new AuthenticationError('You must be logged in to create a recipe.');
         },
+
         updateRecipe: async (parent, { _id, ...updates }, context) => {
             if (context.user) {
                 const recipe = await Recipe.findById(_id);
@@ -37,9 +44,9 @@ const resolvers = {
                     throw new Error('Recipe not found');
                 }
 
-                if (recipe.author.toString() !== context.user._id) {
+                if (recipe.author !== context.user.username) {
                     throw new AuthorizationError('You are not authorized to update this recipe.');
-                }
+                }                
 
                 Object.assign(recipe, updates);
                 await recipe.save();
@@ -55,9 +62,9 @@ const resolvers = {
                     throw new Error('Recipe not found');
                 }
 
-                if (recipe.author.toString() !== context.user._id) {
-                    throw new AuthorizationError('You are not authorized to delete this recipe.');
-                }
+                if (recipe.author !== context.user.username) { 
+                    throw new AuthorizationError('You are not authorized to update this recipe.');
+                }                
 
                 await recipe.remove();
                 return recipe;
@@ -112,13 +119,14 @@ const resolvers = {
         },
     },
     Recipe: {
-        author: async (recipe) => {
-            return await User.findById(recipe.author);
+        author: (recipe) => {
+            return recipe.author;
         },
-    },
+    },    
     User: {
         recipes: async (user) => {
-            return await Recipe.find({ author: user._id });
+            // Find recipes by the user's username or email
+            return await Recipe.find({ author: user.username });
         },
     },
 };
