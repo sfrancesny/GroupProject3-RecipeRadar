@@ -2,6 +2,7 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import CreateRecipePage from './pages/CreateRecipePage';
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
       <div>
         <Header />
         <HomePage />
+        <Footer />
       </div>
     ),
   },
@@ -22,7 +24,8 @@ const router = createBrowserRouter([
     element: (
       <div>
         <Header />
-        <LoginPage /> 
+        <LoginPage />
+        <Footer /> 
       </div>
     ),
   },
@@ -32,7 +35,9 @@ const router = createBrowserRouter([
       <div>
         <Header />
         <CreateRecipePage />
+        <Footer />
       </div>
+      
     ),
   },
   {
@@ -41,6 +46,7 @@ const router = createBrowserRouter([
       <div>
         <Header />
         <SignupPage />
+        <Footer />
       </div>
     ),
   },

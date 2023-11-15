@@ -1,0 +1,60 @@
+/* Home.css */
+
+.home-container {
+    text-align: center;
+    margin: 20px;
+    background-color: rgba(189, 158, 48, 0.5);
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
+    min-height: 100vh; 
+  }
+  
+  .search-container {
+    margin: 20px 0;
+  }
+  
+  .search-input {
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .recipes-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+
+  .recipe-card {
+    background-color: #FFFFD2; /* Clean background */
+    border-radius: 10px; /* Smoothed corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    padding: 20px; /* Spacing inside the card */
+    margin: 15px; /* Spacing outside the card */
+    max-width: 300px; /* Maximum width of the card */
+    text-align: center; /* Centering the text */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+  }
+  
+  .recipe-title {
+    color: #333; /* Dark color for the title */
+    font-size: 1.4em; /* Slightly larger font size for the title */
+    margin-bottom: 15px; /* Spacing after the title */
+  }
+  
+  .recipe-description {
+    color: #666; /* Lighter color for description */
+    font-size: 0.9em; /* Smaller font size for the description */
+    margin-bottom: 20px; /* Spacing after the description */
+  }
+  
+  .recipe-card:hover {
+    transform: translateY(-5px); /* Slightly raise the card on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+  }
+  

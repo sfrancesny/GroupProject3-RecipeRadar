@@ -1,3 +1,4 @@
+
 [
   {
     "title": "Vegetable Soup",
@@ -27,5 +28,56 @@
     "cookingTime": 40,
     "servings": 12,
     "author": "Admin"
-  }
+  },
+  {
+    "title": "Classic Lasagna",
+    "description": "A traditional Italian dish layered with rich meat sauce, creamy béchamel, and melted cheese.",
+    "ingredients": ["Lasagna Noodles", "Ground Beef", "Onion", "Garlic", "Tomato Sauce", "Mozzarella Cheese", "Parmesan Cheese", "Bechamel Sauce"],
+    "instructions": [
+      "Preheat the oven to 375F.",
+      "Cook the lasagna noodles according to package instructions.",
+      "In a pan, cook ground beef, onion, and garlic. Add tomato sauce and simmer.",
+      "Layer a baking dish with noodles, meat sauce, béchamel, and cheeses.",
+      "Repeat the layering and top with cheese.",
+      "Bake for 45 minutes or until the top is golden and bubbly."
+    ],
+    "preparationTime": 30,
+    "cookingTime": 45,
+    "servings": 8,
+    "author": "Admin"
+  },
+  {
+    "title": "Potato Leek Soup",
+    "description": "A creamy and comforting soup made with potatoes, leeks, and chicken broth.",
+    "ingredients": ["Leeks", "Potatoes", "Butter", "Chicken Broth", "Heavy Cream", "Salt", "Pepper"],
+    "instructions": [
+      "Clean and chop the leeks, and peel and dice the potatoes.",
+      "In a pot, melt butter and sauté the leeks until soft.",
+      "Add potatoes and chicken broth, and bring to a boil. Simmer until potatoes are tender.",
+      "Blend the soup until smooth and return to the pot.",
+      "Stir in heavy cream and season with salt and pepper.",
+      "Serve warm garnished with chives or parsley."
+    ],
+    "preparationTime": 15,
+    "cookingTime": 30,
+    "servings": 6,
+    "author": "Admin"
+  },
+  {
+    "title": "Classic Tiramisu",
+    "description": "An elegant and rich Italian dessert layered with mascarpone, coffee-soaked ladyfingers, and cocoa.",
+    "ingredients": ["Ladyfingers", "Espresso", "Mascarpone Cheese", "Egg Yolks", "Sugar", "Cocoa Powder", "Dark Rum"],
+    "instructions": [
+      "Mix egg yolks and sugar until light and fluffy. Fold in mascarpone cheese and rum.",
+      "Dip ladyfingers briefly in espresso and layer them in a dish.",
+      "Spread a layer of the mascarpone mixture over the ladyfingers.",
+      "Repeat layers and finish with a mascarpone layer.",
+      "Dust the top with cocoa powder.",
+      "Chill for at least 4 hours before serving."
+    ],
+    "preparationTime": 20,
+    "cookingTime": 0,
+    "servings": 8,
+    "author": "Admin"
+  }    
 ]    

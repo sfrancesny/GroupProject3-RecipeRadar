@@ -1,18 +1,21 @@
 // client/src/pages/Signup.jsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { CreateUser } from '../graphql/mutations';
+import './Signup.css';
 
 const SignupPage = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const [createUserMutation] = useMutation(CreateUser, {
     onCompleted: (data) => {
       setMessage(`User ${data.createUser.username} created successfully!`);
-      // Redirect or additional logic here
+      navigate('/');
     },
     onError: (error) => {
       setMessage(error.message);
@@ -21,10 +24,21 @@ const SignupPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    createUserMutation({ 
-      variables: { username, email, password }
+    try {
+    const response = await createRecipeMutation({
+      variables: {
+        variables: { username, email, password }
+      },
     });
-  };
+    console.log('Recipe created:', response);
+    // success message
+    setMessage('Recipe successfully added!');
+    // Optionally redirect or update the UI
+  } catch (error) {
+    console.error('Error creating recipe:', error);
+    setMessage('Failed to create recipe: ' + error.message);
+  }
+};
 
   return (
     <div className="signup-container">
