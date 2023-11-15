@@ -3,6 +3,7 @@ import React from 'react';
 import { ApolloProvider } from '@apollo/client';
 import client from './apollo';
 import Main from './Main';
+import './App.css';
 
 function App() {
   return (

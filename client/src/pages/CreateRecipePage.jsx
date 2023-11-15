@@ -14,6 +14,7 @@ const CreateRecipePage = () => {
   const [cookingTime, setCookingTime] = useState('');
   const [servings, setServings] = useState('');
   const [instructions, setInstructions] = useState('');
+  const [author, setAuthor] = useState('');
   const navigate = useNavigate();
 
   // UseMutation hook with the imported CreateRecipe mutation
@@ -23,7 +24,8 @@ const CreateRecipePage = () => {
     e.preventDefault();
     try {
       const response = await createRecipeMutation({
-        variables: { 
+        variables: {
+          recipeInput: { 
           title, 
           description,
           preparationTime: parseInt(preparationTime, 10),
@@ -31,6 +33,8 @@ const CreateRecipePage = () => {
           servings: parseInt(servings, 10),
           ingredients: ingredients.split(',').map(ingredient => ingredient.trim()),
           instructions: instructions.split('.').map(instruction => instruction.trim()),
+          author,
+          }
         },
       });
       console.log('Recipe created:', response);
@@ -44,7 +48,7 @@ const CreateRecipePage = () => {
 
   return (
     <div className="create-recipe-container">
-      <h2>Create a Recipe</h2>
+      <h1>Create Your Recipe</h1>
       <form onSubmit={handleSubmit} className="create-recipe-form">
         <div className="form-group">
           <label htmlFor="title">Title:</label>
@@ -114,6 +118,16 @@ const CreateRecipePage = () => {
             onChange={(e) => setInstructions(e.target.value)}
           />
         </div>
+        <div className="form-group">
+          <label htmlFor="author">Author:</label>
+          <input
+            id="author"
+            type="text"
+            placeholder="Enter author's name"
+            value={author}
+            onChange={(e) => setAuthor(e.target.value)}
+          />
+          </div>
         <button type="submit" className="create-recipe-button">Create Recipe</button>
       </form>
     </div>
@@ -121,3 +135,4 @@ const CreateRecipePage = () => {
 };
 
 export default CreateRecipePage;
+

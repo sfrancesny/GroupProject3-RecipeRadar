@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { useNavigate, Link } from 'react-router-dom';
 import { LoginUser } from '../graphql/mutations';
+import './login.css';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -43,7 +44,7 @@ function Login() {
           <label htmlFor="password">Password:</label>
           <input id="password" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
-        <button type="submit">Login</button>
+        <button className='submit-button' type="submit">Login</button>
         {message && <p>{message}</p>}
       </form>
       <p className="signup-prompt">

@@ -67,7 +67,7 @@ const typeDefs = `
     updateUser(username: String, email: String, password: String): User
     updateRecipe(_id: ID!, updates: RecipeInput!): Recipe
     deleteRecipe(_id: ID!): Recipe
-    createRecipe(title: String!, description: String, ingredients: [String]!, instructions: [String]!, author: String!): Recipe
+    createRecipe(recipeInput: RecipeInput!): Recipe
     loginUser(username: String!, password: String!): AuthPayload
     logoutUser: LogoutPayload
   }

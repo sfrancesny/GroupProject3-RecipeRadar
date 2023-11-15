@@ -1,0 +1,9 @@
+
+body {
+    background-image: url('/imgs/RecipeRadar-IMG.jpg');
+    background-size: cover; /* Cover the entire area */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    min-height: 100vh; /* Minimum height to cover the whole viewport */
+  }
+  

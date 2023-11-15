@@ -1,4 +1,5 @@
-// mutation.js
+// client\src\graphql\mutations.js
+
 import { gql } from '@apollo/client';
 
 export const CreateRecipe = gql`
