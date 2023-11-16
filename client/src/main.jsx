@@ -1,12 +1,12 @@
 // client/src/Main.jsx
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage';
-import CreateRecipePage from './pages/CreateRecipePage';
-import SignupPage from './pages/SignupPage';
+import Header from './components/header.jsx';
+import Footer from './components/Footer.jsx';
+import HomePage from './pages/homePage.jsx';
+import LoginPage from './pages/loginPage.jsx';
+import CreateRecipePage from './pages/CreateRecipePage.jsx';
+import SignupPage from './pages/SignupPage.jsx';
 
 const router = createBrowserRouter([
   {
