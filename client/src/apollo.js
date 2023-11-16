@@ -8,6 +8,8 @@ const httpLink = createHttpLink({
 
 const authLink = setContext((_, { headers }) => {
   const authToken = localStorage.getItem('authToken');
+  // Log the token being used for the request
+  console.log('Auth Token:', authToken);
   return {
     headers: {
       ...headers,
@@ -16,9 +18,31 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
+// Middleware for logging outgoing requests
+const requestLogger = new ApolloLink((operation, forward) => {
+  console.log(`[Request]: ${operation.operationName}`, operation);
+  return forward(operation).map((response) => {
+    // Log the response from the server
+    console.log(`[Response]: ${operation.operationName}`, response);
+    return response;
+  });
+});
+
+// Afterware for logging errors
+const errorLogger = new ApolloLink((operation, forward) => {
+  return forward(operation).map((response) => {
+    if (response.errors) {
+      // Log any errors returned by the server
+      console.error(`[GraphQL Error]: ${operation.operationName}`, response.errors);
+    }
+    return response;
+  });
+});
+
 const client = new ApolloClient({
-  link: ApolloLink.from([authLink, httpLink]),
+  link: ApolloLink.from([authLink, requestLogger, errorLogger, httpLink]),
   cache: new InMemoryCache(),
 });
 
 export default client;
+

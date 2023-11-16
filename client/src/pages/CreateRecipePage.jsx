@@ -37,7 +37,7 @@ const CreateRecipePage = () => {
     // Log the variables for debugging
     console.log("Submitting with:", { title, description, preparationTime, cookingTime, servings, ingredients, instructions, author });
 
-  // NEW: Add a console log to inspect final recipeInput data
+  // console log to inspect final recipeInput data
     console.log("Final recipeInput data:", {
       title,
       description,

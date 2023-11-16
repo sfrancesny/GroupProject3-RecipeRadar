@@ -58,3 +58,38 @@
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
   }
   
+  /* Styles for the buttons container */
+.recipe-actions {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+/* Common styles for both buttons */
+.recipe-actions button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Styles for the Update button */
+.update-button {
+  background-color: #4CAF50;
+}
+
+.update-button:hover {
+  background-color: #45a049;
+}
+
+/* Styles for the Delete button */
+.delete-button {
+  background-color: #f44336;
+}
+
+.delete-button:hover {
+  background-color: #d32f2f;
+}

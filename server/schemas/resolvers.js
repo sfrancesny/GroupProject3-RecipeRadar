@@ -73,21 +73,25 @@ const resolvers = {
         },
         deleteRecipe: async (parent, { _id }, context) => {
             if (context.user) {
-                const recipe = await Recipe.findById(_id);
-
-                if (!recipe) {
-                    throw new Error('Recipe not found');
-                }
-
-                if (recipe.author !== context.user.username) { 
-                    throw new AuthorizationError('You are not authorized to update this recipe.');
-                }                
-
-                await recipe.remove();
-                return recipe;
+              const recipe = await Recipe.findById(_id);
+          
+              if (!recipe) {
+                throw new Error('Recipe not found');
+              }
+          
+              if (recipe.author !== context.user.username) { 
+                throw new AuthorizationError('You are not authorized to delete this recipe.');
+              }
+          
+              // Use findByIdAndRemove or deleteOne
+              await Recipe.findByIdAndRemove(_id);
+              // or await Recipe.deleteOne({ _id });
+          
+              return recipe;
             }
             throw new AuthenticationError('You must be logged in to delete a recipe.');
-        },
+          },          
+          
         createUser: async (parent, args) => {
             const existingUser = await User.findOne({ username: args.username });
         
