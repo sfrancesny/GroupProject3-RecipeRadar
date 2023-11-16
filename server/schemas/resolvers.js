@@ -25,16 +25,33 @@ const resolvers = {
     },
     Mutation: {
         createRecipe: async (parent, args, context) => {
+            // Log the received arguments and user context for debugging
+            console.log('Received arguments for createRecipe:', args);
+            console.log('User context:', context.user);
+
             if (context.user) {
-                const recipe = await Recipe.create({ 
-                    ...args, 
-                    author: context.user.username, 
-                    ingredients: args.ingredients
-                }); 
-                return recipe;
+                try {
+                    // Log detailed input before creating a recipe
+                    console.log('Attempting to create recipe with:', args.recipeInput);
+
+                    const recipe = await Recipe.create({ 
+                        ...args.recipeInput, 
+                        author: context.user.username
+                    }); 
+
+                    console.log('Recipe created successfully:', recipe);
+                    return recipe;
+                } catch (error) {
+                    // Log detailed error if recipe creation fails
+                    console.error('Error creating recipe:', error);
+                    throw new Error('Failed to create recipe. Please check the input data.');
+                }
+            } else {
+                console.log('Create recipe attempt without authentication');
+                throw new AuthenticationError('You must be logged in to create a recipe.');
             }
-            throw new AuthenticationError('You must be logged in to create a recipe.');
         },
+
 
         updateRecipe: async (parent, { _id, ...updates }, context) => {
             if (context.user) {

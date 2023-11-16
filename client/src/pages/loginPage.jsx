@@ -1,6 +1,6 @@
 // client\src\pages\LoginPagejsx
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 import { useNavigate, Link } from 'react-router-dom';
 import { LoginUser } from '../graphql/mutations';
@@ -10,27 +10,40 @@ function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [isFormValid, setIsFormValid] = useState(false);
   const navigate = useNavigate();
 
-  const [loginUserMutation] = useMutation(LoginUser);
+  const [loginUserMutation, { loading, error }] = useMutation(LoginUser);
 
-  const handleLogin = async () => {
-    try {
-      navigate('/'); // Navigate to the root URL
-      const { data } = await loginUserMutation({
+  useEffect(() => {
+    if (isFormValid && !loading) {
+      loginUserMutation({
         variables: { username, password },
-      });
-  
-      const token = data.loginUser.token;
-      localStorage.setItem('token', token); // Save token to local storage
-      console.log('Login successful');
-      setMessage('Login successful!');
-      
-    } catch (error) {
-      console.error('Login error:', error.message);
-      setMessage('Login failed: ' + error.message);
+      })
+        .then(({ data }) => {
+          const token = data.loginUser.token;
+          localStorage.setItem('token', token);
+          console.log('Login successful');
+          navigate('/'); // Navigate to a different route after successful login
+        })
+        .catch((error) => {
+          console.error('Login error:', error);
+          setMessage('Login failed: ' + error.message);
+        });
     }
-  };  
+    // Reset form validation
+    setIsFormValid(false);
+  }, [isFormValid, loginUserMutation, loading, username, password, navigate]);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    // Simple form validation
+    if (username && password) {
+      setIsFormValid(true);
+    } else {
+      setMessage('Please enter both username and password');
+    }
+  };
 
   return (
     <div className="login-container">
@@ -44,8 +57,9 @@ function Login() {
           <label htmlFor="password">Password:</label>
           <input id="password" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
-        <button className='submit-button' type="submit">Login</button>
+        <button className='submit-button' type="submit" disabled={loading}>Login</button>
         {message && <p>{message}</p>}
+        {error && <p>Error: {error.message}</p>}
       </form>
       <p className="signup-prompt">
         Don't have an account? <Link to="/signup">Sign up here</Link>.

@@ -25,6 +25,11 @@ const typeDefs = `
     recipes: [Recipe]
   }
 
+  input LoginInput {
+    username: String!
+    password: String!
+  }  
+
   input IngredientInput {
     name: String
   }

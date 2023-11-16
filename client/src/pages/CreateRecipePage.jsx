@@ -1,8 +1,9 @@
 // client\src\pages\CreateRecipePage.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { CreateRecipe } from '../graphql/mutations';
+import useAuth from '../Hooks/useAuth';
 import './recipePage.css';
 
 const CreateRecipePage = () => {
@@ -15,36 +16,76 @@ const CreateRecipePage = () => {
   const [servings, setServings] = useState('');
   const [instructions, setInstructions] = useState('');
   const [author, setAuthor] = useState('');
+  const [errorMessage, setErrorMessage] = useState(''); // State for UI error message
   const navigate = useNavigate();
 
   // UseMutation hook with the imported CreateRecipe mutation
   const [createRecipeMutation] = useMutation(CreateRecipe);
 
+  const { isAuthenticated } = useAuth(); // Use the useAuth hook
+
+  useEffect(() => {
+    // Redirect to login if not authenticated
+    if (!isAuthenticated()) {
+      navigate('/login');
+    }
+  }, [navigate, isAuthenticated]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMessage(''); // Clear previous errors
+    // Log the variables for debugging
+    console.log("Submitting with:", { title, description, preparationTime, cookingTime, servings, ingredients, instructions, author });
+
+  // NEW: Add a console log to inspect final recipeInput data
+    console.log("Final recipeInput data:", {
+      title,
+      description,
+      preparationTime: parseInt(preparationTime, 10),
+      cookingTime: parseInt(cookingTime, 10),
+      servings: parseInt(servings, 10),
+      ingredients: ingredients.split(',').map(ingredient => ingredient.trim()),
+      instructions: instructions.split('.').map(instruction => instruction.trim()),
+      author,
+    });
+    // Validation
+    if (!title || !description || !author || isNaN(preparationTime) || isNaN(cookingTime) || isNaN(servings)) {
+      setErrorMessage('Please fill in all fields correctly.');
+      return;
+    }
+  
+    // Parse integer values
+    const prepTime = parseInt(preparationTime, 10);
+    const cookTime = parseInt(cookingTime, 10);
+    const numServings = parseInt(servings, 10);
+  
+    // Ensure arrays are correctly formatted
+    const ingredientArray = ingredients.split(',').map(ingredient => ingredient.trim()).filter(Boolean);
+    const instructionArray = instructions.split('.').map(instruction => instruction.trim()).filter(Boolean);
+  
     try {
       const response = await createRecipeMutation({
         variables: {
-          recipeInput: { 
-          title, 
-          description,
-          preparationTime: parseInt(preparationTime, 10),
-          cookingTime: parseInt(cookingTime, 10),
-          servings: parseInt(servings, 10),
-          ingredients: ingredients.split(',').map(ingredient => ingredient.trim()),
-          instructions: instructions.split('.').map(instruction => instruction.trim()),
-          author,
+          recipeInput: {
+            title,
+            description,
+            preparationTime: prepTime,
+            cookingTime: cookTime,
+            servings: numServings,
+            ingredients: ingredientArray,
+            instructions: instructionArray,
+            author,
           }
         },
       });
+  
       console.log('Recipe created:', response);
-      // Redirect or show success message
       navigate('/');
     } catch (error) {
       console.error('Error creating recipe:', error);
-      // Show error message
+      setErrorMessage('Failed to create recipe. Please try again.');
     }
-  };
+  };  
 
   return (
     <div className="create-recipe-container">
@@ -64,6 +105,7 @@ const CreateRecipePage = () => {
           <label htmlFor="description">Description:</label>
           <textarea
             id="description"
+            type="text"
             placeholder="Describe your recipe"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -135,4 +177,3 @@ const CreateRecipePage = () => {
 };
 
 export default CreateRecipePage;
-
