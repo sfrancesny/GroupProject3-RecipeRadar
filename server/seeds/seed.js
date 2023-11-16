@@ -6,7 +6,7 @@ const usersData = require('./user.json');
 const recipesData = require('./recipe.json');
 
 // Connect to MongoDB
-mongoose.connect('mongodb://127.0.0.1:27017', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/recipe-radar-db', {
 });
 
 // Function to drop collections
