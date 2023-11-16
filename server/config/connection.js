@@ -1,5 +1,5 @@
 //connect to mongoose databse
-
+// server\config\connection.js
 const mongoose = require("mongoose");
 mongoose.connect(
   process.env.MONGODB_URI ||
