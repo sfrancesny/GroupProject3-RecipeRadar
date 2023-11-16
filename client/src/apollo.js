@@ -4,7 +4,7 @@ import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error'; 
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:3001/graphql',
+  uri: 'https://hidden-badlands-25759-537e248c2de6.herokuapp.com/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {
