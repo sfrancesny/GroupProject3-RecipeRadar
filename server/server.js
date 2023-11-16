@@ -26,12 +26,17 @@ const startApolloServer = async () => {
 
   // Serve up static assets
   if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../client/src')));
+    app.use(express.static(path.join(__dirname, '../client/build')));
   }
-  
-  // Add Apollo Server middleware and set the path to /graphql
+
   server.applyMiddleware({ app, path: '/graphql' });
 
+  // Add a catch-all route for serving index.html
+  if (process.env.NODE_ENV === 'production') {
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+    });
+  }
   // Database connection
   db.once('open', () => {
     // Start the server
