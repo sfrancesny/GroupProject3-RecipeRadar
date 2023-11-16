@@ -1,20 +1,9 @@
-const mongoose = require('mongoose');
+//connect to mongoose databse
 
-// Use an environment variable for your MongoDB URI
-const MONGODB_URI = process.env.MONGODB_URI;
-
-if (!MONGODB_URI) {
-    console.error('No MongoDB connection string. Set MONGODB_URI environment variable.');
-    process.exit(1);
-}
-
-mongoose.connect(MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-})
-.then(() => console.log('MongoDB connected successfully.'))
-.catch(err => console.error('MongoDB connection error:', err));
+const mongoose = require("mongoose");
+mongoose.connect(
+  process.env.MONGODB_URI ||
+    "mongodb+srv://sonianyenkan80:BKCFPV81@cluster0.4staqrz.mongodb.net/recipe-radar-db?retryWrites=true&w=majority"
+);
 
 module.exports = mongoose.connection;
