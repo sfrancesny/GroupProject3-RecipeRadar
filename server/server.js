@@ -15,12 +15,16 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: authMiddleware,
+  formatError: (error) => {
+    console.error(`[Server Error]: Message: ${error.message}, Path: ${error.path}`);
+    return error;
+  },
 });
 
 // Apply middleware to the Express application as a path
 const startApolloServer = async () => {
   await server.start();
-  
+
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
 
@@ -30,6 +34,12 @@ const startApolloServer = async () => {
   }
 
   server.applyMiddleware({ app, path: '/graphql' });
+
+  app.use((err, req, res, next) => {
+    console.error(`[Express Error]: ${err.stack}`);
+    res.status(500).send('Internal Server Error');
+  });
+  
 
   // Add a catch-all route for serving index.html
   if (process.env.NODE_ENV === "production") {
