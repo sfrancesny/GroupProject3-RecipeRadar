@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 import { useNavigate, Link } from 'react-router-dom';
 import { LoginUser } from '../graphql/mutations';
-import './login.css';
+import './Login.css';
 
 function Login() {
   const [username, setUsername] = useState('');
