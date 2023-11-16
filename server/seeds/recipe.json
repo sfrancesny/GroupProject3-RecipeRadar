@@ -79,5 +79,80 @@
     "cookingTime": 0,
     "servings": 8,
     "author": "Admin"
-  }    
+  },
+  {
+    "title": "Coconut Creme Pie",
+    "description": "A sweet and creamy coconut pie with a crispy crust.",
+    "ingredients": ["Pie crust", "Coconut milk", "Eggs", "Sugar", "Vanilla extract", "Shredded coconut"],
+    "instructions": [
+      "Pre-bake the pie crust until golden brown.",
+      "In a bowl, whisk together coconut milk, eggs, sugar, and vanilla extract.",
+      "Pour the mixture into the pie crust and bake until set.",
+      "Top with shredded coconut and chill in the refrigerator before serving."
+    ],
+    "preparationTime": 20,
+    "cookingTime": 45,
+    "servings": 8,
+    "author": "soniafrances"
+  },
+  {
+    "title": "Apple Pie",
+    "description": "Classic apple pie with a flaky crust and a cinnamon-spiced apple filling.",
+    "ingredients": ["Pie crust", "Apples", "Sugar", "Cinnamon", "Butter", "Flour"],
+    "instructions": [
+      "Peel and slice apples. Toss with sugar, cinnamon, and flour.",
+      "Place apple mixture into a pie crust. Dot with butter.",
+      "Cover with a second pie crust and seal the edges.",
+      "Bake until the crust is golden and the apples are tender."
+    ],
+    "preparationTime": 30,
+    "cookingTime": 60,
+    "servings": 8,
+    "author": "soniafrances"
+  }, 
+  {
+    "title": "Banana Creme Pie",
+    "description": "Creamy banana filling with a light, fluffy topping, in a buttery crust.",
+    "ingredients": ["Pie crust", "Bananas", "Heavy cream", "Sugar", "Egg yolks", "Vanilla extract"],
+    "instructions": [
+      "Slice bananas and arrange them in a pre-baked pie crust.",
+      "Whisk together egg yolks, sugar, and heavy cream; cook until thickened.",
+      "Pour the mixture over the bananas. Chill in the refrigerator.",
+      "Top with whipped cream and sliced bananas before serving."
+    ],
+    "preparationTime": 25,
+    "cookingTime": 20,
+    "servings": 8,
+    "author": "soniafrances"
+  }, 
+  {
+    "title": "Smoked Honey Turkey Wings",
+    "description": "Savory smoked turkey wings glazed with a sweet honey sauce.",
+    "ingredients": ["Turkey wings", "Honey", "Soy sauce", "Garlic", "Black pepper", "Paprika", "Olive oil"],
+    "instructions": [
+      "Marinate turkey wings in a mixture of soy sauce, garlic, black pepper, and paprika.",
+      "Preheat the smoker and smoke the wings for 2-3 hours at 225°F.",
+      "In a saucepan, mix honey and olive oil, then brush the mixture over the wings.",
+      "Smoke for an additional 30 minutes until the glaze is caramelized."
+    ],
+    "preparationTime": 30,
+    "cookingTime": 210,
+    "servings": 4,
+    "author": "soniafrances"
+  },
+  {
+    "title": "Fried Turkey",
+    "description": "Crispy, juicy deep-fried whole turkey, perfect for a festive occasion.",
+    "ingredients": ["Whole turkey", "Seasoning salt", "Black pepper", "Garlic powder", "Peanut oil"],
+    "instructions": [
+      "Clean the turkey and pat dry. Season with seasoning salt, black pepper, and garlic powder.",
+      "Heat peanut oil in a large deep fryer to 375°F.",
+      "Carefully lower the turkey into the fryer. Cook for 3-4 minutes per pound.",
+      "Once the turkey reaches an internal temperature of 165°F, remove and let rest before carving."
+    ],
+    "preparationTime": 45,
+    "cookingTime": 60,
+    "servings": 8,
+    "author": "soniafrances"
+  }              
 ]    

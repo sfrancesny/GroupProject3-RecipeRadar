@@ -25,16 +25,33 @@ const resolvers = {
     },
     Mutation: {
         createRecipe: async (parent, args, context) => {
+            // Log the received arguments and user context for debugging
+            console.log('Received arguments for createRecipe:', args);
+            console.log('User context:', context.user);
+
             if (context.user) {
-                const recipe = await Recipe.create({ 
-                    ...args, 
-                    author: context.user.username, 
-                    ingredients: args.ingredients
-                }); 
-                return recipe;
+                try {
+                    // Log detailed input before creating a recipe
+                    console.log('Attempting to create recipe with:', args.recipeInput);
+
+                    const recipe = await Recipe.create({ 
+                        ...args.recipeInput, 
+                        author: context.user.username
+                    }); 
+
+                    console.log('Recipe created successfully:', recipe);
+                    return recipe;
+                } catch (error) {
+                    // Log detailed error if recipe creation fails
+                    console.error('Error creating recipe:', error);
+                    throw new Error('Failed to create recipe. Please check the input data.');
+                }
+            } else {
+                console.log('Create recipe attempt without authentication');
+                throw new AuthenticationError('You must be logged in to create a recipe.');
             }
-            throw new AuthenticationError('You must be logged in to create a recipe.');
         },
+
 
         updateRecipe: async (parent, { _id, ...updates }, context) => {
             if (context.user) {
@@ -56,21 +73,25 @@ const resolvers = {
         },
         deleteRecipe: async (parent, { _id }, context) => {
             if (context.user) {
-                const recipe = await Recipe.findById(_id);
-
-                if (!recipe) {
-                    throw new Error('Recipe not found');
-                }
-
-                if (recipe.author !== context.user.username) { 
-                    throw new AuthorizationError('You are not authorized to update this recipe.');
-                }                
-
-                await recipe.remove();
-                return recipe;
+              const recipe = await Recipe.findById(_id);
+          
+              if (!recipe) {
+                throw new Error('Recipe not found');
+              }
+          
+              if (recipe.author !== context.user.username) { 
+                throw new AuthorizationError('You are not authorized to delete this recipe.');
+              }
+          
+              // Use findByIdAndRemove or deleteOne
+              await Recipe.findByIdAndRemove(_id);
+              // or await Recipe.deleteOne({ _id });
+          
+              return recipe;
             }
             throw new AuthenticationError('You must be logged in to delete a recipe.');
-        },
+          },          
+          
         createUser: async (parent, args) => {
             const existingUser = await User.findOne({ username: args.username });
         

@@ -3,18 +3,19 @@
 import { gql } from '@apollo/client';
 
 export const CreateRecipe = gql`
-  mutation CreateRecipe($recipeInput: RecipeInput) {
+  mutation CreateRecipe($recipeInput: RecipeInput!) {
     createRecipe(recipeInput: $recipeInput) {
-    title
-    description
-    preparationTime
-    cookingTime
-    servings
-    ingredients
-    instructions
-    author 
+      title
+      description
+      preparationTime
+      cookingTime
+      servings
+      ingredients
+      instructions
+      author
+    }
   }
-}`;
+`;
 
 export const UpdateRecipe = gql`
   mutation UpdateRecipe($_id: ID!, $updates: RecipeInput) {

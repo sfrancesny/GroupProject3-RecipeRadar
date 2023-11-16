@@ -15,7 +15,7 @@ const SignupPage = () => {
   const [createUserMutation] = useMutation(CreateUser, {
     onCompleted: (data) => {
       setMessage(`User ${data.createUser.username} created successfully!`);
-      navigate('/');
+      navigate('/login');
     },
     onError: (error) => {
       setMessage(error.message);
@@ -25,21 +25,17 @@ const SignupPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-    const response = await createRecipeMutation({
-      variables: {
-        variables: { username, email, password }
-      },
-    });
-    console.log('Recipe created:', response);
-    // success message
-    setMessage('Recipe successfully added!');
-    // Optionally redirect or update the UI
-  } catch (error) {
-    console.error('Error creating recipe:', error);
-    setMessage('Failed to create recipe: ' + error.message);
-  }
-};
-
+      await createUserMutation({
+        variables: { userInput: { username, email, password } },
+      });
+      console.log('User created:', username);
+      // Success message is already handled in the 'onCompleted' callback
+    } catch (error) {
+      console.error('Error creating user:', error);
+      setMessage('Failed to create user: ' + error.message);
+    }
+  };
+  
   return (
     <div className="signup-container">
       <h2>Sign Up</h2>

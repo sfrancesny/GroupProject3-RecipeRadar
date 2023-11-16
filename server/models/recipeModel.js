@@ -27,7 +27,7 @@ const recipeSchema = new Schema({
     author: {
         type: String,
         ref: 'User',
-        required: true,
+        required: false,
     },    
     ingredients: [String], 
     instructions: [String],
