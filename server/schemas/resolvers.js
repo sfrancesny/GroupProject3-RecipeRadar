@@ -8,7 +8,14 @@ const { signToken, AuthenticationError, AuthorizationError } = require('../utils
 const resolvers = {
     Query: {
         recipes: async () => {
-            return await Recipe.find();
+            try {
+                const recipes = await Recipe.find();
+                console.log('Fetched recipes:', recipes);
+                return recipes;
+            } catch (error) {
+                console.error('Error fetching recipes:', error);
+                throw new Error('Failed to fetch recipes');
+            }
         },
         singleRecipe: async (parent, { _id }) => {
             return await Recipe.findById(_id);
@@ -25,24 +32,19 @@ const resolvers = {
     },
     Mutation: {
         createRecipe: async (parent, args, context) => {
-            // Log the received arguments and user context for debugging
             console.log('Received arguments for createRecipe:', args);
             console.log('User context:', context.user);
 
             if (context.user) {
                 try {
-                    // Log detailed input before creating a recipe
                     console.log('Attempting to create recipe with:', args.recipeInput);
-
                     const recipe = await Recipe.create({ 
                         ...args.recipeInput, 
                         author: context.user.username
                     }); 
-
                     console.log('Recipe created successfully:', recipe);
                     return recipe;
                 } catch (error) {
-                    // Log detailed error if recipe creation fails
                     console.error('Error creating recipe:', error);
                     throw new Error('Failed to create recipe. Please check the input data.');
                 }
@@ -51,7 +53,6 @@ const resolvers = {
                 throw new AuthenticationError('You must be logged in to create a recipe.');
             }
         },
-
 
         updateRecipe: async (parent, { _id, ...updates }, context) => {
             if (context.user) {
