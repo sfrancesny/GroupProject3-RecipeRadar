@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017recipe-radar-db');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://sonianyenkan80:BKCFPV81@cluster0.4staqrz.mongodb.net/recipe-radar-db?retryWrites=true&w=majority');
 
 module.exports = mongoose.connection;
