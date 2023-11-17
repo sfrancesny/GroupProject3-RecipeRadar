@@ -19,13 +19,15 @@ Welcome to RecipeRadar, a culinary delight for every home cook and food enthusia
 ## Screenshots
 Here's a glimpse of what RecipeRadar has to offer:
 
-![RecipeRadar Home Page](<screenshot link>)
+<img src="Screenshot 2023-11-16 222426.png" alt="Description of Image">
+<img src="Screenshot 2023-11-16 222443.png" alt="Description of Image">
 
 ## Link to Deployed Application
-Experience RecipeRadar now: [RecipeRadar Live](<live link>)
+Experience RecipeRadar now: [RecipeRadar Live](<https://hidden-badlands-25759-537e248c2de6.herokuapp.com/>)
 
 ## Contributors
 This project is brought to you by a team of dedicated developers:
+- **[Sonia Nyenkan](https://github.com/sfrancesny)**
 - **[James Kawam](https://github.com/kawam001)**
 
 ## Tech Stack
